@@ -1,0 +1,80 @@
+services:
+  fping-worker-1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fping_worker_1
+    env_file:
+      - .env
+    environment:
+      - DB_HOST=timescaledb
+      - DB_PORT=5432
+      - WORKER_ID=worker-1
+    volumes:
+      - ./hosts-worker-1.txt:/app/hosts.txt:ro
+      - ./worker.py:/app/worker.py:ro
+    cap_add:
+      - NET_RAW
+    sysctls:
+      - net.ipv4.ping_group_range=0 2147483647
+    restart: unless-stopped
+
+  fping-worker-2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fping_worker_2
+    env_file:
+      - .env
+    environment:
+      - DB_HOST=timescaledb
+      - DB_PORT=5432
+      - WORKER_ID=worker-2
+    volumes:
+      - ./hosts-worker-2.txt:/app/hosts.txt:ro
+      - ./worker.py:/app/worker.py:ro
+    cap_add:
+      - NET_RAW
+    sysctls:
+      - net.ipv4.ping_group_range=0 2147483647
+    restart: unless-stopped
+
+  fping-worker-3:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fping_worker_3
+    env_file:
+      - .env
+    environment:
+      - DB_HOST=timescaledb
+      - DB_PORT=5432
+      - WORKER_ID=worker-3
+    volumes:
+      - ./hosts-worker-3.txt:/app/hosts.txt:ro
+      - ./worker.py:/app/worker.py:ro
+    cap_add:
+      - NET_RAW
+    sysctls:
+      - net.ipv4.ping_group_range=0 2147483647
+    restart: unless-stopped
+
+  fping-worker-4:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fping_worker_4
+    env_file:
+      - .env
+    environment:
+      - DB_HOST=timescaledb
+      - DB_PORT=5432
+      - WORKER_ID=worker-4
+    volumes:
+      - ./hosts-worker-4.txt:/app/hosts.txt:ro
+      - ./worker.py:/app/worker.py:ro
+    cap_add:
+      - NET_RAW
+    sysctls:
+      - net.ipv4.ping_group_range=0 2147483647
+    restart: unless-stopped

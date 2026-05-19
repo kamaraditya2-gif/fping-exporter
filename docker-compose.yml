@@ -1,0 +1,28 @@
+version: "3.8"
+
+# Load env dari .env otomatis
+
+services:
+  # Grafana (opsional - untuk visualisasi)
+  grafana:
+    image: grafana/grafana:latest
+    container_name: ping_grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin123
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/datasources:/etc/grafana/provisioning/datasources:ro
+      - ./grafana/dashboards:/etc/grafana/provisioning/dashboards:ro
+    networks:
+      - ping_net
+    profiles:
+      - grafana
+
+volumes:
+  grafana_data:
+
+networks:
+  ping_net:
+    driver: bridge

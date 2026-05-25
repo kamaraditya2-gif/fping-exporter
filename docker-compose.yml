@@ -19,6 +19,7 @@ services:
       - ping_net
     profiles:
       - grafana
+    restart: unless-stopped
 
 volumes:
   grafana_data:
